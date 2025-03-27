@@ -2,7 +2,8 @@ import { ClientGreeting } from "~/app/components/client-greeting";
 import { Button } from "~/components/ui";
 import { HydrateClient, trpc } from "~/trpc/server";
 
-export default function Home() {
+export default async function Home() {
+  "use cache";
   void trpc.hello.prefetch({
     text: "client",
   });
