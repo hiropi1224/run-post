@@ -1,4 +1,4 @@
 import { drizzle } from "drizzle-orm/neon-http";
+import { env } from "~/env";
 
-// biome-ignore lint/style/noNonNullAssertion: TODO: t3envを入れる
-export const db = drizzle(process.env.DATABASE_URL!);
+export const db = drizzle(env.DATABASE_URL);

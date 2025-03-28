@@ -1,6 +1,7 @@
 /* eslint-disable node/prefer-global/process */
 import dotenv from "dotenv";
 import { defineConfig } from "drizzle-kit";
+import { env } from "~/env";
 
 dotenv.config({
   path: ".env.local",
@@ -11,7 +12,6 @@ export default defineConfig({
   schema: "./db/schema.ts",
   dialect: "postgresql",
   dbCredentials: {
-    // biome-ignore lint/style/noNonNullAssertion: TODO: t3envを入れる
-    url: process.env.DATABASE_URL!,
+    url: env.DATABASE_URL,
   },
 });

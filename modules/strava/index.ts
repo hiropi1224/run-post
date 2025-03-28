@@ -1,3 +1,4 @@
+import { env } from "~/env";
 import type {
   ActivityLaps,
   StravaActivity,
@@ -5,16 +6,11 @@ import type {
 } from "~/types/strava";
 
 const STRAVA_API_CONFIG = {
-  // biome-ignore lint/style/noNonNullAssertion: <explanation>
-  baseUrl: process.env.stravaEndpoint!,
-  // biome-ignore lint/style/noNonNullAssertion: <explanation>
-  activityEndpoint: process.env.stravaActivityEndpoint!,
-  // biome-ignore lint/style/noNonNullAssertion: <explanation>
-  clientId: process.env.stravaClientId!,
-  // biome-ignore lint/style/noNonNullAssertion: <explanation>
-  clientSecret: process.env.stravaClientSecret!,
-  // biome-ignore lint/style/noNonNullAssertion: <explanation>
-  refreshToken: process.env.stravaRefreshToken!,
+  baseUrl: env.STRAVA_ENDPOINT,
+  activityEndpoint: env.STRAVA_ACTIVITIES_ENDPOINT,
+  clientId: env.STRAVA_CLIENT_ID,
+  clientSecret: env.STRAVA_CLIENT_SECRET,
+  refreshToken: env.STRAVA_REFRESH_TOKEN,
 } as const;
 
 class StravaError extends Error {
@@ -68,7 +64,7 @@ interface BaseParams {
   access_token: string;
 }
 
-interface ActivityListParams extends BaseParams {
+interface ActivityListParams {
   page?: number;
   pre_page?: number;
   before?: string;
@@ -80,13 +76,13 @@ interface ActivityDetailParams extends BaseParams {
 }
 
 export const getStravaActivity = async ({
-  token_type,
-  access_token,
   page = 1,
   pre_page = 10,
   before = "",
   after = "",
 }: ActivityListParams): Promise<StravaActivity[]> => {
+  const { token_type, access_token } = await getStravaToken();
+
   const url = new URL(STRAVA_API_CONFIG.activityEndpoint);
   url.searchParams.append("page", page.toString());
   url.searchParams.append("per_page", pre_page.toString());
