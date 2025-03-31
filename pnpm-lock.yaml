@@ -59,6 +59,9 @@ importers:
       superjson:
         specifier: ^2.2.2
         version: 2.2.2
+      twitter-api-v2:
+        specifier: ^1.22.0
+        version: 1.22.0
       zod:
         specifier: ^3.24.2
         version: 3.24.2
@@ -4471,6 +4474,9 @@ packages:
 
   tween-functions@1.2.0:
     resolution: {integrity: sha512-PZBtLYcCLtEcjL14Fzb1gSxPBeL7nWvGhO5ZFPGqziCcr8uvHp0NDmdjBchp6KHL+tExcg0m3NISmKxhU394dA==}
+
+  twitter-api-v2@1.22.0:
+    resolution: {integrity: sha512-KlcRL9vcBzjeS/PwxX33NziP+SHp9n35DOclKtpOmnNes7nNVnK7WG4pKlHfBqGrY5kAz/8J5ERS8DWkYOaiWw==}
 
   type-fest@2.19.0:
     resolution: {integrity: sha512-RAH822pAdBgcNMAfWnCBU3CFZcfZ/i1eZjwFU/dsLKumyuuP3niueg2UAukXYF0E2AAoc82ZSSf9J0WQBinzHA==}
@@ -9628,6 +9634,8 @@ snapshots:
   tty-browserify@0.0.1: {}
 
   tween-functions@1.2.0: {}
+
+  twitter-api-v2@1.22.0: {}
 
   type-fest@2.19.0: {}
 
