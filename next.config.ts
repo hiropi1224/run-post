@@ -5,6 +5,7 @@ const nextConfig: NextConfig = {
     dynamicIO: true,
     ppr: true,
   },
+  serverExternalPackages: ["twitter-api-v2"],
 };
 
 export default nextConfig;
