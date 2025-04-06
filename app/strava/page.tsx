@@ -1,3 +1,4 @@
+"use cache";
 import { Suspense } from "react";
 import { ActivityList } from "~/app/strava/components/activity-list";
 import { getStravaActivity } from "~/modules/strava";

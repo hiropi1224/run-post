@@ -31,7 +31,6 @@ async function stravaFetch<T>(
   try {
     const res = await fetch(url, {
       ...options,
-      next: { revalidate: 3600 },
     });
 
     if (!res.ok) {
