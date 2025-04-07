@@ -1,4 +1,4 @@
-import { ActivityCard } from "~/app/(auth)/strava/components/activity-card";
+import { ActivityCard } from "~/app/(post)/strava/components/activity-card";
 import type { StravaActivity } from "~/types/strava";
 export async function ActivityList({
   activities,

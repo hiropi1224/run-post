@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { TwitterAuthButton } from "~/app/(auth)/x/components/twitter-authbutton";
+import { TwitterAuthButton } from "~/app/(post)/x/components/twitter-authbutton";
 
 export default async function Home() {
   return (
