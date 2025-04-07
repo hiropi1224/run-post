@@ -1,4 +1,4 @@
-import { TwitterAuthButton } from "~/app/x/components/twitter-authbutton";
+import { TwitterAuthButton } from "~/app/(auth)/x/components/twitter-authbutton";
 
 export function TwitterAuth() {
   return (
