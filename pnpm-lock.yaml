@@ -38,9 +38,6 @@ importers:
       drizzle-orm:
         specifier: ^0.40.0
         version: 0.40.0(@neondatabase/serverless@0.10.4)(@types/pg@8.11.6)(gel@2.0.1)
-      justd-icons:
-        specifier: ^1.10.25
-        version: 1.10.25(react-dom@19.1.0-canary-5398b711-20250314(react@19.1.0-canary-5398b711-20250314))(react@19.1.0-canary-5398b711-20250314)
       next:
         specifier: canary
         version: 15.3.0-canary.9(@babel/core@7.26.10)(react-dom@19.1.0-canary-5398b711-20250314(react@19.1.0-canary-5398b711-20250314))(react@19.1.0-canary-5398b711-20250314)
@@ -3535,12 +3532,6 @@ packages:
 
   jsonfile@6.1.0:
     resolution: {integrity: sha512-5dgndWOriYSm5cnYaJNhalLNDKOqFwyDB/rr1E9ZsGciGvKPs8R2xYGCacuf3z6K1YKDz182fd+fY3cn3pMqXQ==}
-
-  justd-icons@1.10.25:
-    resolution: {integrity: sha512-ZpqkyysiN8E/tTXhjdiVaI3Jol19rKeTDeQOyI84ba5BkmXW0hT2+wr0EdQ+GltMH3ZMX6Gg84O1/mA118bSUA==}
-    peerDependencies:
-      react: ^19.0.0
-      react-dom: ^19.0.0
 
   keyv@4.5.4:
     resolution: {integrity: sha512-oxVHkHR/EJf2CNXnWxRLW6mg7JyCCUcG0DtEGmL2ctUo1PNTin1PUil+r/+4r5MpVgC/fn1kjsx7mjSujKqIpw==}
@@ -8597,12 +8588,6 @@ snapshots:
       universalify: 2.0.1
     optionalDependencies:
       graceful-fs: 4.2.11
-
-  justd-icons@1.10.25(react-dom@19.1.0-canary-5398b711-20250314(react@19.1.0-canary-5398b711-20250314))(react@19.1.0-canary-5398b711-20250314):
-    dependencies:
-      '@babel/runtime': 7.26.10
-      react: 19.1.0-canary-5398b711-20250314
-      react-dom: 19.1.0-canary-5398b711-20250314(react@19.1.0-canary-5398b711-20250314)
 
   keyv@4.5.4:
     dependencies:

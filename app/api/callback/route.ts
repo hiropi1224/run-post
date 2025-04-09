@@ -1,10 +1,10 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import type { NextRequest, NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 import TwitterApi from "twitter-api-v2";
 import { env } from "~/env";
 
-export const GET = async (request: NextRequest, _res: NextResponse) => {
+export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const state = searchParams.get("state");
   const code = searchParams.get("code");

@@ -23,7 +23,6 @@
     "client-only": "^0.0.1",
     "dotenv": "^16.4.7",
     "drizzle-orm": "^0.40.0",
-    "justd-icons": "^1.10.25",
     "next": "canary",
     "react": "canary",
     "react-aria-components": "^1.7.1",

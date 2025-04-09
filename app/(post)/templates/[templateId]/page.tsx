@@ -1,5 +1,4 @@
 import type { NextPageProps } from "~/app/type";
-import { Button } from "~/components/ui";
 
 export default async function TemplateDetailPage({
   params,
@@ -10,7 +9,7 @@ export default async function TemplateDetailPage({
     <div className="space-y-8">
       <div className="flex items-center justify-between">
         <h1 className="font-bold text-3xl">{`${templateId}: テンプレート詳細`}</h1>
-        <Button type="button">編集</Button>
+        <button type="button">編集</button>
       </div>
 
       <div className="rounded-lg bg-white p-6 shadow-md">
