@@ -1,8 +1,10 @@
+import { Button, HStack, Text } from "@chakra-ui/react";
+
 export default async function Home() {
   return (
-    <div className="">
-      <p>hello world</p>
-      <button type="button">Click me</button>
-    </div>
+    <HStack>
+      <Text>Hello World</Text>
+      <Button>Click me</Button>
+    </HStack>
   );
 }

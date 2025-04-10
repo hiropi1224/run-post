@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { Box, ClientOnly, Skeleton } from "@chakra-ui/react";
+import { ColorModeToggle } from "~/components/color-mode-toggle";
+import { Header } from "~/components/layouts/header";
+import { Providers } from "~/components/providers";
 import { TRPCProvider } from "~/trpc/client";
 
 export const metadata: Metadata = {
@@ -13,9 +17,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="ja" suppressHydrationWarning>
       <body>
-        <TRPCProvider>{children}</TRPCProvider>
+        <TRPCProvider>
+          <Providers>
+            <Header />
+            {children}
+          </Providers>
+        </TRPCProvider>
       </body>
     </html>
   );
