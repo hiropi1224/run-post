@@ -20,10 +20,7 @@ export default function RootLayout({
     <html lang="ja" suppressHydrationWarning>
       <body>
         <TRPCProvider>
-          <Providers>
-            <Header />
-            {children}
-          </Providers>
+          <Providers>{children}</Providers>
         </TRPCProvider>
       </body>
     </html>
