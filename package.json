@@ -33,6 +33,7 @@
     "server-only": "^0.0.1",
     "superjson": "^2.2.2",
     "twitter-api-v2": "^1.22.0",
+    "valibot": "^1.0.0",
     "zod": "^3.24.2"
   },
   "devDependencies": {
