@@ -1,27 +1,26 @@
 // client-component.tsx
 "use client";
 
-import { Button, Field, Input, Textarea } from "@chakra-ui/react";
-import {
-  mergeForm,
-  useForm,
-  useStore,
-  useTransform,
-} from "@tanstack/react-form";
+import { Button, Field, Input, NativeSelect, Textarea } from "@chakra-ui/react";
+import { mergeForm, useForm, useTransform } from "@tanstack/react-form";
 import { initialFormState } from "@tanstack/react-form/nextjs";
 import { useActionState } from "react";
 import { formAction } from "~/app/actions/template";
-import { formOpts } from "~/modules/templates/form/config";
+import { formOpts, formSchema } from "~/modules/templates/form/config";
 
 export const TemplateForm = () => {
   const [state, action] = useActionState(formAction, initialFormState);
 
   const form = useForm({
     ...formOpts,
-    transform: useTransform((baseForm) => mergeForm(baseForm, state!), [state]),
+    transform: useTransform(
+      (baseForm) => mergeForm(baseForm, state ?? initialFormState),
+      [state],
+    ),
+    validators: {
+      onChange: formSchema,
+    },
   });
-
-  const formErrors = useStore(form.store, (formState) => formState.errors);
 
   return (
     <form
@@ -29,10 +28,6 @@ export const TemplateForm = () => {
       onSubmit={() => form.handleSubmit()}
       className="flex flex-col gap-4"
     >
-      {formErrors.map((error) => (
-        <p key={error as string}>{error}</p>
-      ))}
-
       <form.Field
         name="name"
         validators={{
@@ -43,8 +38,9 @@ export const TemplateForm = () => {
         }}
       >
         {(field) => {
+          console.log(field.state.meta.errors);
           return (
-            <Field.Root required>
+            <Field.Root required invalid={field.state.meta.errors.length > 0}>
               <Field.Label>
                 テンプレート名 <Field.RequiredIndicator />
               </Field.Label>
@@ -56,7 +52,9 @@ export const TemplateForm = () => {
                 onChange={(e) => field.handleChange(e.target.value)}
               />
               {field.state.meta.errors.map((error) => (
-                <Field.ErrorText key={error as string}>{error}</Field.ErrorText>
+                <Field.ErrorText key={error as string}>
+                  {error as string}
+                </Field.ErrorText>
               ))}
             </Field.Root>
           );
@@ -74,8 +72,10 @@ export const TemplateForm = () => {
         }}
       >
         {(field) => {
+          console.log(field.state.meta.errors);
+
           return (
-            <Field.Root required>
+            <Field.Root required invalid={field.state.meta.errors.length > 0}>
               <Field.Label>
                 投稿内容 <Field.RequiredIndicator />
               </Field.Label>
@@ -87,7 +87,9 @@ export const TemplateForm = () => {
               />
               <Field.HelperText>投稿内容を入力してください。</Field.HelperText>
               {field.state.meta.errors.map((error) => (
-                <Field.ErrorText key={error as string}>{error}</Field.ErrorText>
+                <Field.ErrorText key={error as string}>
+                  {error as string}
+                </Field.ErrorText>
               ))}
             </Field.Root>
           );
@@ -100,13 +102,20 @@ export const TemplateForm = () => {
               <Field.Label>
                 カテゴリ <Field.RequiredIndicator />
               </Field.Label>
-              <Input
-                placeholder="カテゴリ"
-                name="type"
-                type="text"
-                value={field.state.value}
-                onChange={(e) => field.handleChange(e.target.value)}
-              />
+              <NativeSelect.Root>
+                <NativeSelect.Field
+                  placeholder="カテゴリを選択してください"
+                  name="type"
+                  value={field.state.value}
+                  onChange={(e) => {
+                    field.handleChange(e.target.value);
+                  }}
+                >
+                  <option value="1">Option 1</option>
+                  <option value="2">Option 2</option>
+                </NativeSelect.Field>
+                <NativeSelect.Indicator />
+              </NativeSelect.Root>
             </Field.Root>
           );
         }}
