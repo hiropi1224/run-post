@@ -17,9 +17,6 @@ export const TemplateForm = () => {
       (baseForm) => mergeForm(baseForm, state ?? initialFormState),
       [state],
     ),
-    validators: {
-      onChange: formSchema,
-    },
   });
 
   return (
@@ -38,7 +35,6 @@ export const TemplateForm = () => {
         }}
       >
         {(field) => {
-          console.log(field.state.meta.errors);
           return (
             <Field.Root required invalid={field.state.meta.errors.length > 0}>
               <Field.Label>
@@ -52,9 +48,7 @@ export const TemplateForm = () => {
                 onChange={(e) => field.handleChange(e.target.value)}
               />
               {field.state.meta.errors.map((error) => (
-                <Field.ErrorText key={error as string}>
-                  {error as string}
-                </Field.ErrorText>
+                <Field.ErrorText key={error}>{error}</Field.ErrorText>
               ))}
             </Field.Root>
           );
@@ -72,8 +66,6 @@ export const TemplateForm = () => {
         }}
       >
         {(field) => {
-          console.log(field.state.meta.errors);
-
           return (
             <Field.Root required invalid={field.state.meta.errors.length > 0}>
               <Field.Label>
@@ -87,9 +79,7 @@ export const TemplateForm = () => {
               />
               <Field.HelperText>投稿内容を入力してください。</Field.HelperText>
               {field.state.meta.errors.map((error) => (
-                <Field.ErrorText key={error as string}>
-                  {error as string}
-                </Field.ErrorText>
+                <Field.ErrorText key={error}>{error}</Field.ErrorText>
               ))}
             </Field.Root>
           );
