@@ -111,8 +111,10 @@ export const TemplateForm = () => {
                     field.handleChange(e.target.value);
                   }}
                 >
-                  <option value="1">Option 1</option>
-                  <option value="2">Option 2</option>
+                  <option value="run">ランニング</option>
+                  <option value="walk">ウォーキング</option>
+                  <option value="cycle">サイクリング</option>
+                  <option value="other">その他</option>
                 </NativeSelect.Field>
                 <NativeSelect.Indicator />
               </NativeSelect.Root>
