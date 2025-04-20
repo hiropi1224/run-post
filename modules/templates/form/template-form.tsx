@@ -6,10 +6,13 @@ import { mergeForm, useForm, useTransform } from "@tanstack/react-form";
 import { initialFormState } from "@tanstack/react-form/nextjs";
 import { useActionState } from "react";
 import { formAction } from "~/app/actions/template";
-import { formOpts, formSchema } from "~/modules/templates/form/config";
+import { formOpts } from "~/modules/templates/form/config";
 
 export const TemplateForm = () => {
-  const [state, action] = useActionState(formAction, initialFormState);
+  const [state, action, isPending] = useActionState(
+    formAction,
+    initialFormState,
+  );
 
   const form = useForm({
     ...formOpts,
@@ -116,7 +119,7 @@ export const TemplateForm = () => {
         selector={(formState) => [formState.canSubmit, formState.isSubmitting]}
       >
         {([canSubmit, isSubmitting]) => (
-          <Button type="submit" disabled={!canSubmit}>
+          <Button type="submit" disabled={!canSubmit} loading={isPending}>
             {isSubmitting ? "..." : "Submit"}
           </Button>
         )}

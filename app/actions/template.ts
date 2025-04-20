@@ -1,10 +1,16 @@
 'use server'
 
+import { randomUUID } from 'node:crypto'
+import type { NeonDbError } from '@neondatabase/serverless'
 import {
   ServerValidateError,
   createServerValidate,
+  initialFormState,
 } from '@tanstack/react-form/nextjs'
+import { db } from '~/db'
+import { templates } from '~/db/schema'
 import { formOpts } from '~/modules/templates/form/config'
+import { trpc } from '~/trpc/server'
 
 const serverValidate = createServerValidate({
   ...formOpts,
@@ -22,18 +28,43 @@ const serverValidate = createServerValidate({
 })
 
 export async function formAction(prev: unknown, formData: FormData) {
-  console.log("---- form action ----")
   try {
     const validatedData = await serverValidate(formData)
-    console.log("validatedData", validatedData);
+
+    const template = await trpc.templates.create({
+      name: validatedData.name,
+      content: validatedData.content,
+      type: validatedData.type as 'run' | 'walk' | 'cycle' | 'other',
+    })
+
+    return {
+      ...initialFormState,
+      submitted: true,
+      data: template,
+    }
 
   } catch (e) {
+    const error = e as NeonDbError
+    console.log('Error details:', {
+      message: error.message,
+      code: error.code,
+      detail: error.detail,
+      values: {
+        name: formData.get('name'),
+        content: formData.get('content'),
+        type: formData.get('type'),
+      }
+    })
     if (e instanceof ServerValidateError) {
       return e.formState
     }
 
-    throw e
+    return {
+      ...initialFormState,
+      submitted: false,
+      meta: {
+        errors: ['テンプレートの作成に失敗しました']
+      }
+    }
   }
-
-  console.log('form has successfully validated!')
 }
