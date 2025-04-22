@@ -1,6 +1,6 @@
 {
   "[typescript]": {
-    "editor.defaultFormatter": "denoland.vscode-deno"
+    "editor.defaultFormatter": "biomejs.biome"
   },
   "[typescriptreact]": {
     "editor.defaultFormatter": "biomejs.biome"
@@ -8,6 +8,7 @@
   "cSpell.words": [
     "biomejs",
     "chakra",
+    "sonner",
     "Strava"
   ],
   "deno.enablePaths": [
