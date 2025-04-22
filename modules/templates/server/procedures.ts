@@ -12,17 +12,20 @@ export const templatesRouter = createTRPCRouter({
   }),
 
   create: baseProcedure.input(formSchema).mutation(async ({ ctx, input }) => {
-    const [template] = await db.insert(templates).values({
-      id: randomUUID(),
-      name: input.name,
-      content: input.content,
-      type: input.type,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    }).returning();
+    const [template] = await db
+      .insert(templates)
+      .values({
+        id: randomUUID(),
+        name: input.name,
+        content: input.content,
+        type: input.type,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      })
+      .returning();
 
     return {
       template,
     };
   }),
-})
+});

@@ -44,4 +44,4 @@ export async function GET(request: NextRequest) {
     .catch(() => console.error("Invalid verifier or access tokens!"));
 
   return redirect("/");
-};
+}
