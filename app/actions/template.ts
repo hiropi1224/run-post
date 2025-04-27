@@ -1,13 +1,9 @@
 "use server";
 
-import type { NeonDbError } from "@neondatabase/serverless";
-import {
-  ServerValidateError,
-  createServerValidate,
-  initialFormState,
-} from "@tanstack/react-form/nextjs";
+import { createServerValidate } from "@tanstack/react-form/nextjs";
 import { formOpts } from "~/modules/templates/form/config";
 import { trpc } from "~/trpc/server";
+import type { ActionState } from "~/utils/with-callback";
 
 const serverValidate = createServerValidate({
   ...formOpts,
@@ -24,43 +20,27 @@ const serverValidate = createServerValidate({
   },
 });
 
-export async function formAction(prev: unknown, formData: FormData) {
+export async function formAction(
+  prev: unknown,
+  formData: FormData,
+): Promise<ActionState> {
   try {
     const validatedData = await serverValidate(formData);
 
-    const template = await trpc.templates.create({
+    await trpc.templates.create({
       name: validatedData.name,
       content: validatedData.content,
       type: validatedData.type as "run" | "walk" | "cycle" | "other",
     });
 
     return {
-      ...initialFormState,
-      submitted: true,
-      data: template,
+      status: "SUCCESS",
+      message: "テンプレートを作成しました",
     };
   } catch (e) {
-    const error = e as NeonDbError;
-    console.log("Error details:", {
-      message: error.message,
-      code: error.code,
-      detail: error.detail,
-      values: {
-        name: formData.get("name"),
-        content: formData.get("content"),
-        type: formData.get("type"),
-      },
-    });
-    if (e instanceof ServerValidateError) {
-      return e.formState;
-    }
-
     return {
-      ...initialFormState,
-      submitted: false,
-      meta: {
-        errors: ["テンプレートの作成に失敗しました"],
-      },
+      status: "ERROR",
+      message: "テンプレートの作成に失敗しました",
     };
   }
 }

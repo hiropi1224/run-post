@@ -13,7 +13,7 @@ type Callbacks<T, R = unknown> = {
 
 type CreateToastCallbacksOptions = { loadingMessage?: string };
 
-type ActionState = {
+export type ActionState = {
   status: "SUCCESS" | "ERROR";
   message?: string;
 };

@@ -3,21 +3,18 @@
 
 import { Button, Field, Input, NativeSelect, Textarea } from "@chakra-ui/react";
 import { mergeForm, useForm, useTransform } from "@tanstack/react-form";
-import { initialFormState } from "@tanstack/react-form/nextjs";
-import { useActionState } from "react";
-import { formAction } from "~/app/actions/template";
 import { formOpts } from "~/modules/templates/form/config";
+import { useTemplateForm } from "./use-template-form";
 
 export const TemplateForm = () => {
-  const [state, action, isPending] = useActionState(
-    formAction,
-    initialFormState,
-  );
+  const [state, action, isPending] = useTemplateForm();
 
   const form = useForm({
     ...formOpts,
     transform: useTransform(
-      (baseForm) => mergeForm(baseForm, state ?? initialFormState),
+      (baseForm) =>
+        // stateがServerFormState型の場合のみmerge
+        state && "values" in state ? mergeForm(baseForm, state) : baseForm,
       [state],
     ),
   });
