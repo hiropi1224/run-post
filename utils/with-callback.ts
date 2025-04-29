@@ -2,6 +2,7 @@
  * @see https://www.robinwieruch.de/react-server-actions-toast-useactionstate/
  */
 
+import { redirect } from "next/navigation";
 import { toast } from "sonner";
 
 type Callbacks<T, R = unknown> = {
@@ -11,7 +12,10 @@ type Callbacks<T, R = unknown> = {
   onError?: (result: T) => void;
 };
 
-type CreateToastCallbacksOptions = { loadingMessage?: string };
+type CreateToastCallbacksOptions = {
+  loadingMessage?: string;
+  redirect?: string;
+};
 
 export type ActionState = {
   status: "SUCCESS" | "ERROR";
@@ -60,6 +64,9 @@ export const createToastCallbacks = (options: CreateToastCallbacksOptions) => {
     onSuccess: (result: ActionState) => {
       if (result?.message) {
         toast.success(result.message);
+      }
+      if (options.redirect) {
+        redirect(options.redirect);
       }
     },
     onError: (result: ActionState) => {

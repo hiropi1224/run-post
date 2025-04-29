@@ -8,6 +8,7 @@ export const useTemplateForm = () => {
       formAction,
       createToastCallbacks({
         loadingMessage: "テンプレートを作成しています...",
+        redirect: "/templates",
       }),
     ),
     null,
