@@ -1,22 +1,22 @@
-import { Button, Heading } from "@chakra-ui/react";
+import { Button, Container, Flex, Heading } from "@chakra-ui/react";
 import Link from "next/link";
-import { TemplateCard } from "~/app/modules/template/ui/components/template-card";
+import { TemplateList } from "~/modules/templates/ui/template-list";
+import { trpc } from "~/trpc/server";
 
 export default function TemplatesPage() {
+  void trpc.templates.getMany.prefetch();
+
   return (
-    <div className="m-4 flex flex-col gap-8">
-      <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
-        {[1, 2, 3, 4, 5, 6].map((item) => (
-          <li key={item}>
-            <Link href={`/templates/${item}`}>
-              <TemplateCard
-                title={`テンプレート ${item}`}
-                description="description"
-              />
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <Container fluid p={4} gap={4} flexDirection="column" display="flex">
+      <Flex justifyContent="space-between" alignItems="center">
+        <Heading as="h1" size="lg">
+          テンプレート一覧
+        </Heading>
+        <Link href="/templates/new">
+          <Button>新規作成</Button>
+        </Link>
+      </Flex>
+      <TemplateList />
+    </Container>
   );
 }
